@@ -2,7 +2,6 @@ import React from "react";
 import Unit from "./Unit";
 
 type UnitProps = {
-  getDimensions?: any;
   label: string;
   value: number;
   factor: number;

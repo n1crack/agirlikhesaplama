@@ -1,24 +1,20 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectShapes, setDimensions } from "../features/slices/shapeReducer";
+import {
+  selectShapes,
+  setDimensions,
+  calculateVolume,
+} from "../features/slices/shapeReducer";
+import { selectDensity } from "../features/slices/mainReducer";
 
 import DensitySelector from "./DensitySelector";
 import Dimension from "./Dimension";
 
 export default function ShapeDimension() {
-  const shapeDimension = useSelector(selectShapes);
-  // const density = useSelector(selectDensity);
+  const Shapes = useSelector(selectShapes);
+  const Density = useSelector(selectDensity);
   const dispatch = useDispatch();
-
-  // burada yapılacak işlemler.
-  // şekil seçilecek.- selected
-  const dimensionList = shapeDimension["plate"].dimensions;
-  // const calc = shapeDimension["plate"].calculate;
-  // şekle ait dimensionlar listelenecek. ++
-  // kayıt girildikçe dimension listesi ve density calculate olacak. +
-
-  // formül seçili şekilden gelecek.
-  // sonuç toplamdan alınacak.
+  const dimensionList = Shapes["plate"].dimensions;
 
   const updateDimensionList = (newDimension: any) => {
     let objIndex = dimensionList.findIndex(
@@ -27,19 +23,10 @@ export default function ShapeDimension() {
     let updatedDimensionList = dimensionList.slice();
     updatedDimensionList[objIndex] = newDimension;
     dispatch(setDimensions({ type: "plate", value: updatedDimensionList }));
-    //return updatedDimensionList;
+    dispatch(calculateVolume({ type: "plate" }));
   };
 
-  // const calculate = (dim: any) => {
-  // let newDimentionList = updateDimensionList(dim);
-  //  let total = calc(newDimentionList, density);
-  //  dispatch(updateTotal(total));
-  // };
-
-  // const calculateOnlyDensity = (value: number) => {
-  //   let total = calc(dimensionList, value);
-  //   dispatch(updateTotal(total));
-  // };
+  const Volume = Shapes["plate"].volume;
 
   return (
     <div className="m-2 p-3">
@@ -57,7 +44,7 @@ export default function ShapeDimension() {
         );
       })}
 
-      <h1>Toplam: {0}</h1>
+      <h1>Toplam: {Volume * Density}</h1>
     </div>
   );
 }

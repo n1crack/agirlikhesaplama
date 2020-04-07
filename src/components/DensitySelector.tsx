@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setDensity, selectDensity } from "../features/slices/calculateReducer";
+import { setDensity, selectDensity } from "../features/slices/mainReducer";
 
 type DensitySelectorType = {};
 
