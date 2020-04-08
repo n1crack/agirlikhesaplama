@@ -142,5 +142,6 @@ export const { setDimensions, calculateVolume } = shapeReducer.actions;
 
 // export selectors
 export const selectShapes = (state: RootState) => state.shape;
+export const selectVolume = (state: RootState) => state.calculate.volume;
 
 export default shapeReducer.reducer;

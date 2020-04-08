@@ -5,15 +5,13 @@ import {
   setDimensions,
   calculateVolume,
 } from "../features/slices/shapeReducer";
-import { selectDensity, selectshapeType } from "../features/slices/mainReducer";
+import { selectShapeType } from "../features/slices/mainReducer";
 
-import DensitySelector from "./DensitySelector";
 import Dimension from "./Dimension";
 
 export default function ShapeDimension() {
   const Shapes = useSelector(selectShapes);
-  const Density = useSelector(selectDensity);
-  const ShapeType = useSelector(selectshapeType);
+  const ShapeType = useSelector(selectShapeType);
   const dispatch = useDispatch();
   const dimensionList = Shapes[ShapeType].dimensions;
 
@@ -27,12 +25,8 @@ export default function ShapeDimension() {
     dispatch(calculateVolume({ type: ShapeType }));
   };
 
-  const Volume = Shapes[ShapeType].volume;
-
   return (
     <div className="m-2 p-3">
-      <DensitySelector />
-
       {dimensionList.map((dimension) => {
         return (
           <Dimension
@@ -45,8 +39,6 @@ export default function ShapeDimension() {
           />
         );
       })}
-
-      <h1>Toplam: {Volume * Density}</h1>
     </div>
   );
 }
