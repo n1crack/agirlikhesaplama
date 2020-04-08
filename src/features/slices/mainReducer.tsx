@@ -20,16 +20,17 @@ export const calculateReducer = createSlice({
     setDensity: (state, action: PayloadAction<number>) => {
       state.density = action.payload;
     },
-    setShape: (state, action: PayloadAction<number>) => {
-      state.density = action.payload;
+    setShape: (state, action: PayloadAction<string>) => {
+      state.shapeType = action.payload;
     },
   },
 });
 
 // export actions
-export const { setDensity } = calculateReducer.actions;
+export const { setDensity, setShape } = calculateReducer.actions;
 
 // export selectors
 export const selectDensity = (state: RootState) => state.calculate.density;
+export const selectshapeType = (state: RootState) => state.calculate.shapeType;
 
 export default calculateReducer.reducer;

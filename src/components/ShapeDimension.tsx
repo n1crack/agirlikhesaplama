@@ -5,7 +5,7 @@ import {
   setDimensions,
   calculateVolume,
 } from "../features/slices/shapeReducer";
-import { selectDensity } from "../features/slices/mainReducer";
+import { selectDensity, selectshapeType } from "../features/slices/mainReducer";
 
 import DensitySelector from "./DensitySelector";
 import Dimension from "./Dimension";
@@ -13,8 +13,9 @@ import Dimension from "./Dimension";
 export default function ShapeDimension() {
   const Shapes = useSelector(selectShapes);
   const Density = useSelector(selectDensity);
+  const ShapeType = useSelector(selectshapeType);
   const dispatch = useDispatch();
-  const dimensionList = Shapes["plate"].dimensions;
+  const dimensionList = Shapes[ShapeType].dimensions;
 
   const updateDimensionList = (newDimension: any) => {
     let objIndex = dimensionList.findIndex(
@@ -22,11 +23,11 @@ export default function ShapeDimension() {
     );
     let updatedDimensionList = dimensionList.slice();
     updatedDimensionList[objIndex] = newDimension;
-    dispatch(setDimensions({ type: "plate", value: updatedDimensionList }));
-    dispatch(calculateVolume({ type: "plate" }));
+    dispatch(setDimensions({ type: ShapeType, value: updatedDimensionList }));
+    dispatch(calculateVolume({ type: ShapeType }));
   };
 
-  const Volume = Shapes["plate"].volume;
+  const Volume = Shapes[ShapeType].volume;
 
   return (
     <div className="m-2 p-3">
@@ -36,6 +37,7 @@ export default function ShapeDimension() {
         return (
           <Dimension
             label={dimension.label}
+            placeholder={dimension.placeholder}
             factor={dimension.factor}
             value={dimension.value}
             key={dimension.label}

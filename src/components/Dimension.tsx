@@ -4,12 +4,14 @@ import Unit from "./Unit";
 type UnitProps = {
   label: string;
   value: number;
+  placeholder: string;
   factor: number;
   onChange: any;
 };
 
 type UnitStates = {
   label: string;
+  placeholder: string;
   value: number;
   factor: number;
 };
@@ -19,6 +21,7 @@ export default class Dimension extends React.Component<UnitProps, UnitStates> {
     super(props);
     this.state = {
       label: this.props.label,
+      placeholder: this.props.placeholder,
       value: this.props.value,
       factor: this.props.factor,
     };
@@ -52,7 +55,7 @@ export default class Dimension extends React.Component<UnitProps, UnitStates> {
           className="input"
           type="number"
           min={0}
-          placeholder={this.state.label}
+          placeholder={this.props.placeholder}
           onChange={(e) => this.setState({ value: Number(e.target.value) })}
           value={this.state.value || ""}
         />
