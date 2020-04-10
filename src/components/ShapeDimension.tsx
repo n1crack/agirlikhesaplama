@@ -1,19 +1,18 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  selectShapes,
   setDimensions,
+  getDimensionList,
   calculateVolume,
+  selectedShape,
 } from "../features/slices/shapeReducer";
-import { selectShapeType } from "../features/slices/mainReducer";
 
 import Dimension from "./Dimension";
 
 export default function ShapeDimension() {
-  const Shapes = useSelector(selectShapes);
-  const ShapeType = useSelector(selectShapeType);
+  const ShapeType = useSelector(selectedShape);
+  const dimensionList = useSelector(getDimensionList);
   const dispatch = useDispatch();
-  const dimensionList = Shapes[ShapeType].dimensions;
 
   const updateDimensionList = (newDimension: any) => {
     let objIndex = dimensionList.findIndex(
@@ -21,12 +20,12 @@ export default function ShapeDimension() {
     );
     let updatedDimensionList = dimensionList.slice();
     updatedDimensionList[objIndex] = newDimension;
-    dispatch(setDimensions({ type: ShapeType, value: updatedDimensionList }));
-    dispatch(calculateVolume({ type: ShapeType }));
+    dispatch(setDimensions(updatedDimensionList));
+    dispatch(calculateVolume());
   };
 
   return (
-    <div className="m-2 p-3">
+    <div className="m-2 ">
       {dimensionList.map((dimension) => {
         return (
           <Dimension
@@ -34,8 +33,8 @@ export default function ShapeDimension() {
             placeholder={dimension.placeholder}
             factor={dimension.factor}
             value={dimension.value}
-            key={dimension.label}
-            onChange={(dim: any) => updateDimensionList(dim)}
+            onChange={updateDimensionList}
+            key={ShapeType + "_" + dimension.label}
           />
         );
       })}

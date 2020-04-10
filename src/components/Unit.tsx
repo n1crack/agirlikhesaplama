@@ -2,37 +2,26 @@ import React from "react";
 
 type UnitProps = {
   onUnitSelect: any;
-};
-type UnitStates = {
-  factor: any;
+  factor: number;
 };
 
-export default class Unit extends React.Component<UnitProps, UnitStates> {
-  constructor(props: UnitProps) {
-    super(props);
-    this.state = {
-      factor: 10,
-    };
-    this.setUnit = this.setUnit.bind(this);
-    this.props.onUnitSelect(10);
-  }
+export default function Unit(props: UnitProps) {
+  const setUnit = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    props.onUnitSelect(Number(e.target.value));
+  };
 
-  setUnit(e: any) {
-    this.setState({ factor: e.target.value });
-    this.props.onUnitSelect(e.target.value);
-  }
-
-  render() {
-    return (
-      <div className="select">
-        <select value={this.state.factor} onChange={this.setUnit}>
-          <option value="10">mm</option>
-          <option value="1">cm</option>
-          <option value="0.01">m</option>
-          <option value="0.032808399">ft</option>
-          <option value="0.393700787">inch</option>
-        </select>
-      </div>
-    );
-  }
+  return (
+    <select
+      className="block appearance-none text-sm md:text-base text-gray-700 bg-white mr-1 py-0 pr-3 leading-tight focus:outline-none select-background-icon"
+      value={props.factor}
+      onChange={setUnit}
+      tabIndex={-1}
+    >
+      <option value="10">mm</option>
+      <option value="1">cm</option>
+      <option value="0.01">m</option>
+      <option value="0.032808399">ft</option>
+      <option value="0.393700787">inch</option>
+    </select>
+  );
 }

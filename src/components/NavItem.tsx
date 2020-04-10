@@ -1,11 +1,11 @@
-import React, { ReactElement } from "react";
+import React from "react";
 
 interface Props {
   children: any;
   onClick: any;
 }
 
-export default function NavItem({ children, onClick }: Props): ReactElement {
+export default function NavItem({ children, onClick }: Props) {
   const handleClick = (e: any) => {
     e.preventDefault();
     onClick(e);

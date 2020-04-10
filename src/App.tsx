@@ -1,45 +1,62 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { selectShapes } from "./features/slices/shapeReducer";
-import { selectDensity, selectShapeType } from "./features/slices/mainReducer";
+import { useDispatch, useSelector } from "react-redux";
+
 import "./App.css";
 import Nav from "./components/Nav";
 import NavItem from "./components/NavItem";
 import ShapeDimension from "./components/ShapeDimension";
-import { setShape } from "./features/slices/mainReducer";
+import { setShape, selectedShape } from "./features/slices/shapeReducer";
 import Result from "./components/Result";
 import DensitySelector from "./components/DensitySelector";
 
+import { Square, Profile, Plate, Pipe } from "./components/Shapes";
+
 function App() {
-  const Shapes = useSelector(selectShapes);
-  const ShapeType = useSelector(selectShapeType);
-  const Volume = useSelector((state) => Shapes[ShapeType].volume);
-  const Density = useSelector(selectDensity);
+    type ShapesType = {
+        [key: string]: any;
+    };
 
-  const dispatch = useDispatch();
-  const setShapeType = (type: string) => {
-    dispatch(setShape(type));
-  };
-  return (
-    <div>
-      <h1 className="font-bold text-lg m-5 "> Malzeme ağırlık hesaplama</h1>
-      <Nav>
-        <NavItem onClick={() => setShapeType("plate")}>Sac</NavItem>
-        <NavItem onClick={() => setShapeType("square")}>Kare</NavItem>
-        <NavItem onClick={() => setShapeType("profile")}>Profil</NavItem>
-        <NavItem onClick={() => setShapeType("pipe")}>Boru</NavItem>
-      </Nav>
-      <DensitySelector />
-      <hr />
-      <ShapeDimension />
-      <hr />
+    const Shapes: ShapesType = {
+        pipe: Pipe,
+        profile: Profile,
+        plate: Plate,
+        square: Square,
+    };
 
-      <div className="m-3">
-        <Result value={Volume * Density} />
-      </div>
-      <hr />
-    </div>
-  );
+    const dispatch = useDispatch();
+    const shapeType = useSelector(selectedShape);
+    const SelectedComponent = Shapes[shapeType];
+    const setShapeType = (type: string) => {
+        dispatch(setShape(type));
+    };
+    return (
+        <div className="flex h-screen justify-center bg-gray-100">
+            <div className="box-border content-center m-auto w-full md:w-auto p-3 border-2 border-gray-600 bg-white">
+                <h1 className="font-bold text-2xl m-5 ">
+                    Malzeme ağırlık hesaplama
+                </h1>
+                <Nav>
+                    <NavItem onClick={() => setShapeType("plate")}>Sac</NavItem>
+                    <NavItem onClick={() => setShapeType("square")}>
+                        Kare
+                    </NavItem>
+                    <NavItem onClick={() => setShapeType("profile")}>
+                        Profil
+                    </NavItem>
+                    <NavItem onClick={() => setShapeType("pipe")}>Boru</NavItem>
+                </Nav>
+                <DensitySelector />
+                <hr />
+                <ShapeDimension />
+                <hr />
+                <div className="m-2">
+                    <Result />
+                </div>
+                <hr />
+                <SelectedComponent></SelectedComponent>
+            </div>
+        </div>
+    );
 }
 
 export default App;
