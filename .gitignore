@@ -20,6 +20,7 @@ package-lock.json
 .env.production.local
 .idea
 .editorconfig
+.vscode
 
 npm-debug.log*
 yarn-debug.log*
