@@ -1,3 +1,3 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Malzeme Ağırlık Hesaplama Programı
 
-## Helloworld Template
+Bu program React, Redux, Typescript ve Tailwindcss kullanılarak hazırlanmıştır.
