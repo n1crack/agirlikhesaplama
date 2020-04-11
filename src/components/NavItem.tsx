@@ -1,25 +1,29 @@
 import React from "react";
 
 interface Props {
-  children: any;
-  onClick: any;
+    children: any;
+    onClick: any;
+    selected: boolean;
 }
 
-export default function NavItem({ children, onClick }: Props) {
-  const handleClick = (e: any) => {
-    e.preventDefault();
-    onClick(e);
-  };
+export default function NavItem({ children, onClick, selected }: Props) {
+    const handleClick = (e: any) => {
+        e.preventDefault();
+        onClick(e);
+    };
 
-  return (
-    <li className="mr-1">
-      <a
-        onClick={(e) => handleClick(e)}
-        className="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold"
-        href="#/"
-      >
-        {children}
-      </a>
-    </li>
-  );
+    return (
+        <li className="mr-1">
+            <a
+                onClick={(e) => handleClick(e)}
+                className={
+                    "bg-white inline-block py-2 px-4 hover:text-blue-800 font-semibold " +
+                    (selected ? " text-red-500" : " text-blue-500")
+                }
+                href="#/"
+            >
+                {children}
+            </a>
+        </li>
+    );
 }

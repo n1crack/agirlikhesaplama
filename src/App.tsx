@@ -23,6 +23,10 @@ function App() {
         square: Square,
     };
 
+    const checkSelected = (name: any): boolean => {
+        return name === shapeType;
+    };
+
     const dispatch = useDispatch();
     const shapeType = useSelector(selectedShape);
     const SelectedComponent = Shapes[shapeType];
@@ -36,14 +40,30 @@ function App() {
                     Malzeme ağırlık hesaplama
                 </h1>
                 <Nav>
-                    <NavItem onClick={() => setShapeType("plate")}>Sac</NavItem>
-                    <NavItem onClick={() => setShapeType("square")}>
+                    <NavItem
+                        selected={checkSelected("plate")}
+                        onClick={() => setShapeType("plate")}
+                    >
+                        Sac
+                    </NavItem>
+                    <NavItem
+                        selected={checkSelected("square")}
+                        onClick={() => setShapeType("square")}
+                    >
                         Kare
                     </NavItem>
-                    <NavItem onClick={() => setShapeType("profile")}>
+                    <NavItem
+                        selected={checkSelected("profile")}
+                        onClick={() => setShapeType("profile")}
+                    >
                         Profil
                     </NavItem>
-                    <NavItem onClick={() => setShapeType("pipe")}>Boru</NavItem>
+                    <NavItem
+                        selected={checkSelected("pipe")}
+                        onClick={() => setShapeType("pipe")}
+                    >
+                        Boru
+                    </NavItem>
                 </Nav>
                 <DensitySelector />
                 <hr />
