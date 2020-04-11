@@ -53,7 +53,7 @@ function App() {
                     <Result />
                 </div>
                 <hr />
-                <SelectedComponent></SelectedComponent>
+                <SelectedComponent />
             </div>
         </div>
     );

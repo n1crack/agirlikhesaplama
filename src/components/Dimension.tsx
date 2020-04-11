@@ -7,6 +7,7 @@ type UnitProps = {
     placeholder: string;
     factor: number;
     onChange: any;
+    event: any;
 };
 
 export default function Dimension(props: UnitProps) {
@@ -18,6 +19,14 @@ export default function Dimension(props: UnitProps) {
     });
 
     useEffect(() => {
+        //props.event
+        props.event.push(() => {
+            setAttr({
+                ...attr,
+                value: 0,
+            });
+        });
+
         if (attr.value !== props.value) {
             props.onChange(attr);
         }
