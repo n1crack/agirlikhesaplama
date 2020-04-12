@@ -1,22 +1,22 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 type ResultUnitsProps = {
-  onUnitSelect: any;
+  onUnitSelect: (value: number) => void;
 };
 
 export default function ResultUnits(props: ResultUnitsProps) {
   const [metric, setMetric] = useState(0.001);
 
-  const setUnit = (e: any) => {
-    setMetric(e.target.value);
-    props.onUnitSelect(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setMetric(Number(e.target.value));
+    props.onUnitSelect(Number(e.target.value));
   };
 
   return (
     <select
       className="block appearance-none w-full text-gray-700 bg-white mr-1 py-0 pr-3 leading-tight focus:outline-none select-background-icon"
       value={metric}
-      onChange={setUnit}
+      onChange={handleChange}
       tabIndex={-1}
     >
       <option value="1">gr</option>

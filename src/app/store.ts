@@ -1,5 +1,5 @@
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import shapeReducer from "../features/slices/shapeReducer";
+import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import shapeReducer from '../features/slices/shapeReducer';
 
 export const store = configureStore({
   reducer: {

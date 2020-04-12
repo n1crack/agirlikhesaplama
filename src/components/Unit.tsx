@@ -1,11 +1,12 @@
-import React from "react";
+import React from 'react';
 
 type UnitProps = {
-  onUnitSelect: any;
+  onUnitSelect: (factor: number) => void;
   factor: number;
 };
 
 export default function Unit(props: UnitProps) {
+  const { factor } = props;
   const setUnit = (e: React.ChangeEvent<HTMLSelectElement>) => {
     props.onUnitSelect(Number(e.target.value));
   };
@@ -13,7 +14,7 @@ export default function Unit(props: UnitProps) {
   return (
     <select
       className="block appearance-none text-sm md:text-base text-gray-700 bg-white mr-1 py-0 pr-3 leading-tight focus:outline-none select-background-icon"
-      value={props.factor}
+      value={factor}
       onChange={setUnit}
       tabIndex={-1}
     >
