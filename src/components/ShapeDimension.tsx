@@ -18,23 +18,23 @@ type DimTypes = {
 };
 
 export default function ShapeDimension() {
-  const ShapeType = useSelector(selectedShape);
+  const selectedShapeType = useSelector(selectedShape);
   const dimensionList = useSelector(getDimensionList);
   const dispatch = useDispatch();
   const childCallables: Array<() => void> = [];
 
-  const updateDimensionList = (newDimension: DimTypes) => {
+  const updateDimension = (newDimension: DimTypes) => {
     dispatch(setDimension(newDimension));
   };
 
   useEffect(() => {
     const updateWeight = (updatedDimensionList: DimTypes[]) => {
-      const calculator = weightCalculation[ShapeType];
+      const calculator = weightCalculation[selectedShapeType];
       dispatch(setVolume(calculator(updatedDimensionList)));
     };
 
     updateWeight(dimensionList);
-  }, [dimensionList, ShapeType, dispatch]);
+  }, [dimensionList, selectedShapeType, dispatch]);
 
   const handleReset = () => {
     childCallables.forEach((callback: () => void) => {
@@ -71,9 +71,9 @@ export default function ShapeDimension() {
             placeholder={dimension.placeholder}
             factor={dimension.factor}
             value={dimension.value}
-            onChange={updateDimensionList}
+            onChange={updateDimension}
             event={childCallables}
-            key={`${ShapeType}_${dimension.label}`}
+            key={`${selectedShapeType}_${dimension.label}`}
           />
         );
       })}
