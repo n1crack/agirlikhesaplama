@@ -32,12 +32,11 @@ export function square(dim: Array<DimensionType>): number {
 }
 
 export function pipe(dim: Array<DimensionType>): number {
-  // (d^2-0.25(d-(d-2t)^2)) * l * Math.PI *
+  // (d^2-0.25(d-(d-2t)^2)) * l * Math.PI
+  let outer_radius = 0.5 * d(dim, 'diameter');
+  let inner_radius = 0.5 * d(dim, 'diameter') - d(dim, 'thickness');
   return (
-    (d(dim, 'diameter') ** 2 -
-      0.25 * (d(dim, 'diameter') - 2 * d(dim, 'thickness')) ** 2) *
-    dim['length'] *
-    Math.PI
+    (outer_radius**2 - inner_radius**2) * Math.PI * d(dim, 'length')
   );
 }
 
