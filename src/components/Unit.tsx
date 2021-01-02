@@ -13,6 +13,7 @@ export default function Unit(props: UnitProps) {
 
   return (
     <select
+      name="unit"
       className="block appearance-none text-sm md:text-base text-gray-700 bg-white mr-1 py-0 pr-3 leading-tight focus:outline-none select-background-icon"
       value={factor}
       onChange={setUnit}

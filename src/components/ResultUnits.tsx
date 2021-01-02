@@ -14,6 +14,7 @@ export default function ResultUnits(props: ResultUnitsProps) {
 
   return (
     <select
+      name="weight_unit"
       className="block appearance-none w-full text-gray-700 bg-white mr-1 py-0 pr-3 leading-tight focus:outline-none select-background-icon"
       value={metric}
       onChange={handleChange}
