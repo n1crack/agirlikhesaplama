@@ -71,7 +71,7 @@ export default function Dimension(props: UnitProps) {
           onChange={handleChangeValue}
         />
         <div className="absolute inset-y-0 right-0 flex items-center">
-          <Unit factor={attr.factor} onUnitSelect={handleChangeFactor} />
+          <Unit name={attr.label} factor={attr.factor} onUnitSelect={handleChangeFactor} />
         </div>
       </div>
     </div>

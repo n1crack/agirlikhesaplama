@@ -3,17 +3,18 @@ import React from 'react';
 type UnitProps = {
   onUnitSelect: (factor: number) => void;
   factor: number;
+  name: string;
 };
 
 export default function Unit(props: UnitProps) {
-  const { factor } = props;
+  const { factor, name } = props;
   const setUnit = (e: React.ChangeEvent<HTMLSelectElement>) => {
     props.onUnitSelect(Number(e.target.value));
   };
 
   return (
     <select
-      name="unit"
+      name={name}
       className="block appearance-none text-sm md:text-base text-gray-700 bg-white mr-1 py-0 pr-3 leading-tight focus:outline-none select-background-icon"
       value={factor}
       onChange={setUnit}
